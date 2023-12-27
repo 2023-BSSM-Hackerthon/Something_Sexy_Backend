@@ -35,8 +35,8 @@ class FormController (
     }
 
     @PatchMapping("/{Id}")
-    fun patchApply(@PathVariable id: Long): Form {
-        return formService.patchApply(id)
+    fun allowApply(@PathVariable id: Long): Form {
+        return formService.allow(id)
     }
 
     @PutMapping("/{Id}")

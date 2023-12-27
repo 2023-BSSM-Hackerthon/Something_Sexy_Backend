@@ -13,15 +13,14 @@ class FormService (
     private val formRepo: FormRepo,
 ){
     fun createApply(dto: ApplyFormDto): Form {
-        val form = dto.toEntity()
-        return formRepo.save(form)
+        return formRepo.save(dto.toEntity())
     }
 
     fun readAllApply(): List<Form> {
         return formRepo.findAll()
     }
     fun readApply(id: Long): Form {
-        val form = formRepo.findById(id)
+        var form = formRepo.findById(id)
         if(form.isPresent()) {
             return form.get()
         }
@@ -30,7 +29,7 @@ class FormService (
 
     fun updateApply(id: Long,dto: ApplyFormDto): Form {
         var form = formRepo.findById(id).get()
-        if (form.state != false) {
+        if (form.state == true) {
             throw IllegalArgumentException("이미 승인된 form 입니다.")
         }
 
@@ -42,8 +41,8 @@ class FormService (
         return id
     }
 
-    fun patchApply(id: Long): Form {
+    fun allow(id: Long): Form {
         var form = formRepo.findById(id).get()
-        return form.patch()
+        return form.allow()
     }
 }

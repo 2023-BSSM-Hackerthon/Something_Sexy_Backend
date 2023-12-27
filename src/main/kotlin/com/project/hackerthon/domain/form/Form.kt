@@ -45,7 +45,7 @@ class Form (
         protected set
 
     @Column(nullable = false)
-    var state: Boolean = false
+    var state: Boolean = state
         protected set
 
     fun update(dto: ApplyFormDto): Form{
@@ -57,7 +57,7 @@ class Form (
         return this
     }
 
-    fun patch(): Form {
+    fun allow(): Form {
         this.state = true
 
         return this
