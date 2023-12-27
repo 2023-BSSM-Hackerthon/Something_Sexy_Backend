@@ -9,12 +9,12 @@ data class ApplyFormDto(
     val title: String,
     val content: String,
     val theme: ThemeType,
-    val author: User,
+    val author: Long,
     val possibleTime: Date,
     val state: Boolean
 )
 
-fun ApplyFormDto.toEntity() = Form(
+fun ApplyFormDto.toEntity(author: User) = Form(
     title = title,
     content = content,
     theme = theme,
