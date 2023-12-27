@@ -24,7 +24,7 @@ class FormController (
         return formService.readAllApply()
     }
 
-    @GetMapping("/{Id}")
+    @GetMapping("/{id}")
     fun readApply(@PathVariable id: Long): Form {
         return formService.readApply(id)
     }
@@ -34,17 +34,17 @@ class FormController (
         return formService.createApply(dto.toDto())
     }
 
-    @PatchMapping("/{Id}")
+    @PatchMapping("/{id}")
     fun allowApply(@PathVariable id: Long): Form {
         return formService.allow(id)
     }
 
-    @PutMapping("/{Id}")
+    @PutMapping("/{id}")
     fun updateApply(@PathVariable id: Long,@RequestBody dto: ApplyFormDto): Form {
         return formService.updateApply(id,dto)
     }
 
-    @DeleteMapping("/{Id}")
+    @DeleteMapping("/{id}")
     fun deleteApply(@PathVariable id: Long): Long {
         return formService.deleteApply(id)
     }
