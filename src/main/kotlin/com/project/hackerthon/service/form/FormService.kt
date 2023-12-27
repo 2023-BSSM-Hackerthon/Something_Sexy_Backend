@@ -12,23 +12,26 @@ import org.springframework.transaction.annotation.Transactional
 class FormService (
     private val formRepo: FormRepo,
 ){
-    fun createApply(dto: ApplyFormDto): Form {
+    fun createForm(dto: ApplyFormDto): Form {
         return formRepo.save(dto.toEntity())
     }
 
-    fun readAllApply(): List<Form> {
+    fun readAllForm(): List<Form> {
         return formRepo.findAll()
     }
-    fun readApply(id: Long): Form {
+
+    fun readForm(id: Long): Form {
         var form = formRepo.findById(id)
+
         if(form.isPresent()) {
             return form.get()
         }
         throw IllegalArgumentException("존재하지 않는 Form 입니다.")
     }
 
-    fun updateApply(id: Long,dto: ApplyFormDto): Form {
+    fun updateForm(id: Long, dto: ApplyFormDto): Form {
         var form = formRepo.findById(id).get()
+
         if (form.state == true) {
             throw IllegalArgumentException("이미 승인된 form 입니다.")
         }
@@ -36,7 +39,7 @@ class FormService (
         return form.update(dto)
     }
 
-    fun deleteApply(id: Long) : Long{
+    fun deleteForm(id: Long) : Long{
         formRepo.deleteById(id)
         return id
     }

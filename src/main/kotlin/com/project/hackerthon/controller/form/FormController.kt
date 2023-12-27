@@ -21,31 +21,31 @@ class FormController (
 ) {
     @GetMapping
     fun readAllApply(): List<Form> {
-        return formService.readAllApply()
+        return formService.readAllForm()
     }
 
-    @GetMapping("/{Id}")
+    @GetMapping("/{id}")
     fun readApply(@PathVariable id: Long): Form {
-        return formService.readApply(id)
+        return formService.readForm(id)
     }
 
     @PostMapping
     fun createApply(@RequestBody dto: ApplyFormDto): Form {
-        return formService.createApply(dto.toDto())
+        return formService.createForm(dto.toDto())
     }
 
-    @PatchMapping("/{Id}")
+    @PatchMapping("/{id}")
     fun allowApply(@PathVariable id: Long): Form {
         return formService.allow(id)
     }
 
-    @PutMapping("/{Id}")
+    @PutMapping("/{id}")
     fun updateApply(@PathVariable id: Long,@RequestBody dto: ApplyFormDto): Form {
-        return formService.updateApply(id,dto)
+        return formService.updateForm(id,dto)
     }
 
     @DeleteMapping("/{Id}")
     fun deleteApply(@PathVariable id: Long): Long {
-        return formService.deleteApply(id)
+        return formService.deleteForm(id)
     }
 }
