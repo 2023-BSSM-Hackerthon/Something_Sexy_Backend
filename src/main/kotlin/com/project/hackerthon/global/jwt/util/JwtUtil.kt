@@ -26,7 +26,7 @@ class JwtUtil(
     }
 
     fun resolveToken(request: HttpServletRequest): String? {
-        val bearer: String? = request.getHeader("Authentication")
+        val bearer: String? = request.getHeader("Authorization")
 
         if (bearer == null || !bearer.startsWith("Bearer ")) {
             return null
