@@ -7,6 +7,7 @@ import jakarta.persistence.*
 @Entity
 class User (
     name: String,
+    authority: Authority,
     group: Int,
     number: Int,
     grade: Int,
@@ -20,14 +21,18 @@ class User (
         protected set
 
     @Column(nullable = false)
+    var authority: Authority = authority
+        protected set
+
+    @Column
     var classes: Int = group
         protected set
 
-    @Column(nullable = false)
+    @Column
     var number: Int = number
         protected set
 
-    @Column(nullable = false)
+    @Column
     var grade: Int = grade
         protected set
 }
