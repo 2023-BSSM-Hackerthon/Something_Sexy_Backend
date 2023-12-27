@@ -1,5 +1,6 @@
 package com.project.hackerthon.domain.form
 
+import com.project.hackerthon.controller.form.dto.ApplyFormDto
 import com.project.hackerthon.domain.user.User
 import com.project.hackerthon.global.entity.BaseDateTime
 import jakarta.persistence.*
@@ -11,7 +12,8 @@ class Form (
     content: String,
     theme: ThemeType,
     author: User,
-    possibleTime: Date
+    possibleTime: Date,
+    state : Boolean
 ): BaseDateTime() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,4 +43,23 @@ class Form (
     )
     var author: User = author
         protected set
+
+    @Column(nullable = false)
+    var state: Boolean = state
+        protected set
+
+    fun update(dto: ApplyFormDto): Form{
+        this.title = dto.title
+        this.content = dto.content
+        this.theme = dto.theme
+        this.possibleTime = dto.possibleTime
+
+        return this
+    }
+
+    fun allow(): Form {
+        this.state = true
+
+        return this
+    }
 }
