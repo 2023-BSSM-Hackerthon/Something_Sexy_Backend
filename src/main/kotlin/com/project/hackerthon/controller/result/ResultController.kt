@@ -1,7 +1,6 @@
 package com.project.hackerthon.controller.result
 
 import com.project.hackerthon.controller.result.dto.ResultDto
-import com.project.hackerthon.controller.result.dto.toDto
 import com.project.hackerthon.domain.result.Result
 import com.project.hackerthon.service.result.ResultReadService
 import com.project.hackerthon.service.result.ResultService
@@ -26,6 +25,6 @@ class ResultController (
 
     @PostMapping
     fun createApply(@RequestBody dto: ResultDto): Long {
-        return resultService.createResult(dto.toDto())
+        return resultService.createResult(dto)
     }
 }
