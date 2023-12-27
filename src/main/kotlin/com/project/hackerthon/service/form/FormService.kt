@@ -2,7 +2,8 @@ package com.project.hackerthon.service.form
 
 import com.project.hackerthon.controller.form.dto.ApplyFormDto
 import com.project.hackerthon.controller.form.dto.toEntity
-import com.project.hackerthon.domain.form.Form
+import com.project.hackerthon.global.error.exception.CustomException
+import com.project.hackerthon.global.error.exception.ErrorCode
 import com.project.hackerthon.repository.FormRepo
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -11,41 +12,29 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional
 class FormService (
     private val formRepo: FormRepo,
-){
-    fun createForm(dto: ApplyFormDto): Form {
-        return formRepo.save(dto.toEntity())
+    private val formReadService: FormReadService
+) {
+    fun createForm(dto: ApplyFormDto): Long {
+        return formRepo.save(dto.toEntity()).id
     }
 
-    fun readAllForm(): List<Form> {
-        return formRepo.findAll()
-    }
+    fun updateForm(id: Long, dto: ApplyFormDto): Long {
+        val form = formReadService.readForm(id)
 
-    fun readForm(id: Long): Form {
-        var form = formRepo.findById(id)
-
-        if(form.isPresent()) {
-            return form.get()
-        }
-        throw IllegalArgumentException("존재하지 않는 Form 입니다.")
-    }
-
-    fun updateForm(id: Long, dto: ApplyFormDto): Form {
-        var form = formRepo.findById(id).get()
-
-        if (form.state == true) {
-            throw IllegalArgumentException("이미 승인된 form 입니다.")
+        if (form.state) {
+            throw CustomException(ErrorCode.ALREADY_APPROVED_FORM)
         }
 
-        return form.update(dto)
+        return formRepo.save(form.update(dto)).id
     }
 
-    fun deleteForm(id: Long) : Long{
+    fun deleteForm(id: Long) : Long {
         formRepo.deleteById(id)
         return id
     }
 
-    fun allow(id: Long): Form {
-        var form = formRepo.findById(id).get()
-        return form.allow()
+    fun allow(id: Long): Long {
+        val form = formReadService.readForm(id)
+        return formRepo.save(form.allow()).id
     }
 }

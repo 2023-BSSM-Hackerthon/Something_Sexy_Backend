@@ -14,15 +14,6 @@ data class ApplyFormDto(
     val state: Boolean
 )
 
-fun ApplyFormDto.toDto() = ApplyFormDto(
-    title = title,
-    content = content,
-    theme = theme,
-    author = author,
-    possibleTime = possibleTime,
-    state = state
-)
-
 fun ApplyFormDto.toEntity() = Form(
     title = title,
     content = content,

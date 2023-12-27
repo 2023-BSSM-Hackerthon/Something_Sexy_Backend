@@ -14,6 +14,10 @@ enum class ErrorCode(
     INVALID_TOKEN(403, "JWT_403_1", "Invalid JWT"),
     EXPIRED_TOKEN(403, "JWT_403_2", "JWT Expired"),
 
+    // form
+    FORM_NOT_FOUND(404, "FORM_404_1", "Form not found"),
+    ALREADY_APPROVED_FORM(409, "FORM_409_1", "Already approved form"),
+
     // server
     INTERNAL_SERVER_ERROR(500, "SERVER_500_1", "Internal server error"),
 }
