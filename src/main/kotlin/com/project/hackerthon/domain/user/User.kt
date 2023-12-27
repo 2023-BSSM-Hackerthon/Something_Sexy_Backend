@@ -30,15 +30,15 @@ class User private constructor(
     var authority: Authority = authority
         protected set
 
-    @Column
+    @Column(nullable = false)
     var classes: Int = group
         protected set
 
-    @Column
+    @Column(nullable = false)
     var number: Int = number
         protected set
 
-    @Column
+    @Column(nullable = false)
     var grade: Int = grade
         protected set
 
