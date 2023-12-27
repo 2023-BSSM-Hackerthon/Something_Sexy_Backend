@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController
 class ResultController (
     private val resultService: ResultService,
 ){
-    @GetMapping("/{Id}")
+    @GetMapping("/{id}")
     fun readApply(@PathVariable id: Long): Result {
         return resultService.readResult(id)
     }

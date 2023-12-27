@@ -37,12 +37,13 @@ class SecurityConfig(
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
 
             .authorizeHttpRequests { authorize -> authorize
-                .requestMatchers(GET, "/api/form").hasAuthority("TEACHER")
-                .requestMatchers(GET, "/api/form/**").hasAuthority("TEACHER")
-                .requestMatchers(PATCH, "/api/form").hasAuthority("TEACHER")
-                .requestMatchers(POST, "/api/result/**").hasAuthority("TEACHER")
-                .requestMatchers("/api/form", "/api/result/**").authenticated()
-                .anyRequest().permitAll() }
+//                .requestMatchers(GET, "/api/form").hasAuthority("TEACHER")
+//                .requestMatchers(GET, "/api/form/**").hasAuthority("TEACHER")
+//                .requestMatchers(PATCH, "/api/form").hasAuthority("TEACHER")
+//                .requestMatchers(POST, "/api/result/**").hasAuthority("TEACHER")
+//                .requestMatchers("/api/form", "/api/result/**").authenticated()
+                .anyRequest().permitAll()
+            }
 
             .addFilterBefore(JwtFilter(jwtUtil), UsernamePasswordAuthenticationFilter::class.java)
             .addFilterBefore(ExceptionFilter(), JwtFilter::class.java)
