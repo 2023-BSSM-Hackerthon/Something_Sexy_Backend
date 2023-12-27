@@ -8,6 +8,7 @@ enum class ErrorCode(
 
     // user
     USER_NOT_FOUND(404, "USER_404_1", "User not found"),
+    UNAUTHORIZED(401, "USER_401_1", "Invalid login"),
 
     // jwt
     INVALID_TOKEN(403, "JWT_403_1", "Invalid JWT"),

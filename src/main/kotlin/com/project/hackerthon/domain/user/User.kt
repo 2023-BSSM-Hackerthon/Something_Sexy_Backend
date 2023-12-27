@@ -1,12 +1,13 @@
 package com.project.hackerthon.domain.user
 
-import com.project.hackerthon.domain.form.Form
 import com.project.hackerthon.global.entity.BaseDateTime
+import com.project.hackerthon.service.auth.clients.dto.response.BsmUserInfoResponseDto
 import jakarta.persistence.*
 
 @Entity
-class User (
+class User private constructor(
     name: String,
+    email: String,
     authority: Authority,
     group: Int,
     number: Int,
@@ -21,6 +22,11 @@ class User (
         protected set
 
     @Column(nullable = false)
+    var email: String = email
+        protected set
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     var authority: Authority = authority
         protected set
 
@@ -35,4 +41,24 @@ class User (
     @Column
     var grade: Int = grade
         protected set
+
+    companion object {
+        fun createStudent(dto: BsmUserInfoResponseDto): User = User(
+            name = dto.user.name,
+            email = dto.user.email,
+            authority = Authority.STUDENT,
+            group = dto.user.classNo!!,
+            number = dto.user.studentNo!!,
+            grade = dto.user.grade!!,
+        )
+
+        fun createTeacher(dto: BsmUserInfoResponseDto): User = User(
+            name = dto.user.name,
+            email = dto.user.email,
+            authority = Authority.TEACHER,
+            group = 0,
+            number = 0,
+            grade = 0
+        )
+    }
 }
