@@ -18,6 +18,9 @@ enum class ErrorCode(
     FORM_NOT_FOUND(404, "FORM_404_1", "Form not found"),
     ALREADY_APPROVED_FORM(409, "FORM_409_1", "Already approved form"),
 
+    // result
+    RESULT_NOT_FOUND(404, "RESULT_404_1", "Result not found"),
+
     // server
     INTERNAL_SERVER_ERROR(500, "SERVER_500_1", "Internal server error"),
 }

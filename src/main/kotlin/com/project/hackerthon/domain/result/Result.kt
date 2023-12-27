@@ -46,4 +46,5 @@ class Result(
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "form_id")
     var form: Form = form
+        protected set
 }
