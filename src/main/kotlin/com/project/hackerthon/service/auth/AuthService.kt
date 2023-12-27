@@ -1,7 +1,10 @@
 package com.project.hackerthon.service.auth
 
 import com.project.hackerthon.controller.auth.dto.response.LoginResponseDto
+import com.project.hackerthon.domain.user.Authority
 import com.project.hackerthon.domain.user.User
+import com.project.hackerthon.global.error.exception.CustomException
+import com.project.hackerthon.global.error.exception.ErrorCode
 import com.project.hackerthon.global.jwt.util.JwtProvider
 import com.project.hackerthon.service.auth.clients.BsmOAuthClient
 import com.project.hackerthon.service.auth.clients.config.BsmOAuthProperties
@@ -26,6 +29,10 @@ class AuthService(
 
         val user: User? = userGetService.findByEmail(info.user.email)
 
+        if (info.user.role == Authority.TEACHER) {
+            throw CustomException(ErrorCode.UNAUTHORIZED)
+        }
+
         if (user == null) {
             val userId: Long = userSaveService.execute(User.createStudent(info))
             return LoginResponseDto(jwtProvider.execute(userId))
@@ -38,6 +45,10 @@ class AuthService(
         val info: BsmUserInfoResponseDto = execute(code)
 
         val user: User? = userGetService.findByEmail(info.user.email)
+
+        if (info.user.role == Authority.STUDENT) {
+            throw CustomException(ErrorCode.UNAUTHORIZED)
+        }
 
         if (user == null) {
             val userId: Long = userSaveService.execute(User.createTeacher(info))

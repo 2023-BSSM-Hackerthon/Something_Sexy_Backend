@@ -26,6 +26,7 @@ class User private constructor(
         protected set
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     var authority: Authority = authority
         protected set
 
