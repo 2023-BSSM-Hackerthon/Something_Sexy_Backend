@@ -1,6 +1,7 @@
 package com.project.hackerthon.controller.form
 
 import com.project.hackerthon.controller.form.dto.ApplyFormDto
+import com.project.hackerthon.controller.form.dto.ApplyRejectDto
 import com.project.hackerthon.domain.form.Form
 import com.project.hackerthon.service.form.FormReadService
 import com.project.hackerthon.service.form.FormService
@@ -34,6 +35,12 @@ class FormController (
     @PostMapping
     fun createApply(@RequestBody dto: ApplyFormDto): Long {
         return formService.createForm(dto)
+    }
+
+    @PostMapping("/{id}")
+    fun rejectApply(@PathVariable id: Long,
+                    @RequestBody dto: ApplyRejectDto): Long {
+        return formService.rejectForm(id, dto)
     }
 
     @PatchMapping("/{id}")
