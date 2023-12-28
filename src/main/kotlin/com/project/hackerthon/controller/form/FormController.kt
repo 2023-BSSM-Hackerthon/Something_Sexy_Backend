@@ -32,6 +32,11 @@ class FormController (
         return ResponseEntity.ok(formReadService.readForm(id))
     }
 
+    @GetMapping("/user")
+    fun readByUser(): ResponseEntity<List<Form>> {
+        return ResponseEntity.ok(formReadService.readFormByUser())
+    }
+
     @PostMapping
     fun createApply(@RequestBody dto: ApplyFormDto): Long {
         return formService.createForm(dto)

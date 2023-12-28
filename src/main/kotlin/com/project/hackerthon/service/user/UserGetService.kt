@@ -5,6 +5,7 @@ import com.project.hackerthon.domain.user.User
 import com.project.hackerthon.global.error.exception.CustomException
 import com.project.hackerthon.global.error.exception.ErrorCode
 import com.project.hackerthon.repository.UserRepo
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -24,5 +25,10 @@ class UserGetService(
 
     fun findAllTeacher(): List<User> {
         return userRepo.findByAuthority(Authority.TEACHER)
+    }
+
+    fun findOne(): User {
+        val userId: Long = SecurityContextHolder.getContext().authentication.name.toLong()
+        return findById(userId)
     }
 }
