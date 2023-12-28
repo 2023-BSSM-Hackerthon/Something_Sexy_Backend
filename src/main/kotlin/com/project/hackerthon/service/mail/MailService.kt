@@ -13,10 +13,10 @@ class MailService(
 ) {
 
     // 학생이 상담 신청을 했을 때
-    fun toTeacher(user: User) {
+    fun toTeacher(student: User, teacher: User) {
         sender(
-            user.email,
-            title = "${user.grade}학년 ${user.classes}번 ${user.number}번 ${user.name}님이 상담을 신청했습니다.",
+            teacher.email,
+            title = "${student.grade}학년 ${student.classes}번 ${student.number}번 ${student.name}님이 상담을 신청했습니다.",
             contents = "http://localhost:3000/applist\n\n" +
                     "위 링크에서 상세 내용을 확인하세요!"
         )

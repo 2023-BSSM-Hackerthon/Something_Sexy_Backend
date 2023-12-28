@@ -41,6 +41,7 @@ class SecurityConfig(
                 .requestMatchers(GET, "/api/form/**").hasAuthority("TEACHER")
                 .requestMatchers(PATCH, "/api/form").hasAuthority("TEACHER")
                 .requestMatchers(POST, "/api/result/**").hasAuthority("TEACHER")
+                .requestMatchers(GET, "/api/auth").authenticated()
                 .requestMatchers("/api/form", "/api/result/**").authenticated()
                 .anyRequest().permitAll()
             }

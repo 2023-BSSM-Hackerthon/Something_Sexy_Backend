@@ -24,7 +24,7 @@ class FormService (
         val user: User = userGetService.findById(dto.author)
 
         userGetService.findAllTeacher()
-            .map { element -> mailService.toTeacher(element) }
+            .map { element -> mailService.toTeacher(user, element) }
 
         return formRepo.save(dto.toEntity(user)).id
     }
